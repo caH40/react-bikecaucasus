@@ -1,0 +1,56 @@
+body {
+	color: #f1f1f1;
+	background: linear-gradient(90.53deg, #0a233a 38.59%, #133810 99.51%);
+}
+
+:active,
+:hover,
+:focus {
+	outline: 0;
+	outline-offset: 0;
+}
+
+.main {
+	min-height: calc(100vh - 120px);
+}
+
+.container {
+	max-width: 1620px;
+	margin: 0px auto;
+	padding: 0px 10px;
+}
+h3 {
+	font-size: 24px;
+}
+/* ================================================================================== */
+/* Header */
+/* ================================================================================== */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 120px;
+}
+.logo {
+	width: 199px;
+	height: 51px;
+}
+.active {
+	color: #39a034;
+}
+/* ================================================================================== */
+/* Footer  */
+/* ================================================================================== */
+
+/* ================================================================================== */
+/* Home */
+/* ================================================================================== */
+.title__page {
+	font-family: 'Montserrat Alternates';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 30px;
+	letter-spacing: 0.05em;
+	padding-top: 10px;
+	margin-bottom: 30px;
+}

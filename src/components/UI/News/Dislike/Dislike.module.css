@@ -1,0 +1,23 @@
+.box {
+	width: 68px;
+	margin-right: 10px;
+}
+.image {
+	display: inline-block;
+	padding: 1px;
+	cursor: pointer;
+	margin-right: 7px;
+}
+.image > svg {
+	pointer-events: none;
+}
+
+.image:hover svg > path:nth-child(1) {
+	fill: red;
+}
+.image:active svg > path:nth-child(2) {
+	fill: #747e87;
+}
+.image:active svg > path:nth-child(3) {
+	fill: #747e87;
+}
