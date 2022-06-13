@@ -15,7 +15,7 @@ const NewsInteractive = ({ element }) => {
 				<Share />
 				<Dislike />
 			</div>
-			<div className='date'>{element.date}</div>
+			<div className='date'>{new Date(element.date).toLocaleString()}</div>
 		</div>
 	)
 }

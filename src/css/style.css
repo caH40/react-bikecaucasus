@@ -38,13 +38,7 @@ h3 {
 .active {
 	color: #39a034;
 }
-/* ================================================================================== */
-/* Footer  */
-/* ================================================================================== */
 
-/* ================================================================================== */
-/* Home */
-/* ================================================================================== */
 .title__page {
 	font-family: 'Montserrat Alternates';
 	font-style: normal;
@@ -53,4 +47,18 @@ h3 {
 	letter-spacing: 0.05em;
 	padding-top: 10px;
 	margin-bottom: 30px;
+}
+
+.home__inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.home__column {
+	max-width: 420px;
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 1px 1px 5px rgb(0, 0, 0);
+	border-radius: 7px;
+	padding: 10px;
 }

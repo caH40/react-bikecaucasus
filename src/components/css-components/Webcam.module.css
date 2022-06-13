@@ -1,0 +1,22 @@
+.block {
+	display: block;
+	width: 400px;
+	height: 219px;
+	border-radius: 7px;
+	overflow: hidden;
+}
+.image {
+	width: 400px;
+	height: 219px;
+	object-fit: cover;
+	object-position: center center;
+}
+.title {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 22px;
+	line-height: 25px;
+	letter-spacing: 0.8px;
+	padding-bottom: 10px;
+}

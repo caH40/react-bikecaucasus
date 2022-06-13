@@ -1,14 +1,14 @@
 import React from 'react'
 import News from '../components/News'
+import Webcam from '../components/Webcam'
 
 const Home = () => {
 	return (
 		<section className='main'>
-			<h3 className='title__page'>Новости, события и анонсы мероприятий. </h3>
-			<div className='main__inner'>
-				<div className='main__inner-news'>
-					<News />
-				</div>
+			<h3 className='title__page'>Новости, события и анонсы мероприятий</h3>
+			<div className='home__inner'>
+				<News />
+				<Webcam />
 			</div>
 		</section>
 	)

@@ -17,7 +17,6 @@ const News = () => {
 	useEffect(() => {
 		fetchGet('/main/news').then(data => setNews(data.news))
 	}, [])
-	console.log(news)
 
 	return (
 		<div>
