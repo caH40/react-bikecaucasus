@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import classes from './InputAuth.module.css'
 
 const InputAuth = ({ label, labelLink, to, validationText }) => {
-	console.log(label, labelLink, to, validationText)
 	return (
-		<div className={classes.block__input}>
+		<div>
 			<div className={classes.label}>
 				<span>{label}</span>
 				{labelLink ? (

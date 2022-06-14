@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
 
 import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
@@ -15,17 +16,13 @@ const Authentication = () => {
 				to='#'
 				validationText='необходимо больше символов'
 			/>
-
-			<div className={classes.block__button}>
-				<button className={classes.button}>Вход</button>
-				<div className={classes.validation}>необходимо больше символов</div>
-			</div>
-			<div className={classes.label}>
-				<span>Первый раз на сайте?</span>
-				<Link to='#' className={classes.link}>
-					Создать аккаунт!
-				</Link>
-			</div>
+			<ButtonAuth
+				label='Первый раз на сайте?'
+				labelLink='Создать аккаунт!'
+				to='#'
+				validationText='необходимо больше символов'>
+				Вход
+			</ButtonAuth>
 		</form>
 	)
 }

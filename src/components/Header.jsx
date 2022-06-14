@@ -13,8 +13,8 @@ const Header = () => {
 			<img className='logo' src='images/icons/logo.svg' alt='' />
 			<Navbar setVisible={setVisible} />
 			<MainModal visible={visible} setVisible={setVisible}>
-				<Authentication />
-				{/* <Registration /> */}
+				{/* <Authentication /> */}
+				<Registration />
 			</MainModal>
 		</header>
 	)
