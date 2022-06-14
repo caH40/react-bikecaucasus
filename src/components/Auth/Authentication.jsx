@@ -1,27 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
 
 const Authentication = () => {
 	return (
 		<form className={classes.block}>
 			<h4 className={classes.title}>Вход на Bike-Caucasus</h4>
-			<div className={classes.block__input}>
-				<div className={classes.label}>Логин или email</div>
-				<input className={classes.input} type='text' />
-				<div className={classes.validation}>необходимо больше символов</div>
-			</div>
-			<div className={classes.block__input}>
-				<div className={classes.label}>
-					<span>Пароль</span>
-					<Link to='#' className={classes.link}>
-						Забыли пароль?
-					</Link>
-				</div>
-				<input className={classes.input} type='text' />
-				<div className={classes.validation}>необходимо больше символов</div>
-			</div>
+			<InputAuth label='Логин или email' validationText='необходимо больше символов' />
+			<InputAuth
+				label='Пароль'
+				labelLink='Забыли пароль?'
+				to='#'
+				validationText='необходимо больше символов'
+			/>
+
 			<div className={classes.block__button}>
 				<button className={classes.button}>Вход</button>
 				<div className={classes.validation}>необходимо больше символов</div>
