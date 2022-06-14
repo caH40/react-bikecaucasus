@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import Home from './pages/Home'
 import Trails from './pages/Trails'

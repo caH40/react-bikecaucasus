@@ -2,10 +2,10 @@ import React from 'react'
 
 import classes from './Dislike.module.css'
 
-const Dislike = () => {
+const Dislike = ({ onClick }) => {
 	return (
 		<div className={classes.box}>
-			<span className={classes.image}>
+			<span onClick={onClick} className={classes.image}>
 				<svg
 					width='28'
 					height='25'

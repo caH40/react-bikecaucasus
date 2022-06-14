@@ -2,7 +2,7 @@ import React from 'react'
 import News from '../components/News'
 import Webcam from '../components/Webcam'
 
-const Home = () => {
+const Home = props => {
 	return (
 		<section className='main'>
 			<h3 className='title__page'>Новости, события и анонсы мероприятий</h3>

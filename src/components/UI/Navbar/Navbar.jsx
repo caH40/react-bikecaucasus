@@ -3,7 +3,7 @@ import React from 'react'
 import Li from './Li'
 import classes from '../../css-components/Navbar.module.css'
 
-const Navbar = () => {
+const Navbar = ({ setVisible }) => {
 	return (
 		<nav className='menu'>
 			<ul className={classes.list}>
@@ -22,9 +22,9 @@ const Navbar = () => {
 				<Li to='profile' className={classes.item} classNameLink={classes.link__img}>
 					<img className={classes.profile__img} src='images/icons/avatar.svg' alt='avatar' />
 				</Li>
-				<Li to='login' className={classes.item} classNameLink={classes.link__img}>
+				<li onClick={() => setVisible(true)} className={classes.link__img}>
 					<img className={classes.login__icon} src='images/icons/login.svg' alt='Пустышка' />
-				</Li>
+				</li>
 			</ul>
 		</nav>
 	)

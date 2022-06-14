@@ -1,0 +1,23 @@
+.authModal {
+	display: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 100;
+}
+
+.content {
+	padding: 25px;
+	background: #f9a527;
+	border-radius: 10px;
+	min-width: 315px;
+}
+
+.authModal.active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

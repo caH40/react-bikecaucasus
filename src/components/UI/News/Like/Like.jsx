@@ -2,10 +2,11 @@ import React from 'react'
 
 import classes from './Like.module.css'
 
-const Like = ({ element }) => {
+const Like = props => {
+	const { onClick, likeQuantity } = props
 	return (
 		<div className={classes.box}>
-			<span className={classes.image}>
+			<span onClick={onClick} className={classes.image}>
 				<svg
 					width='28'
 					height='25'
@@ -23,7 +24,7 @@ const Like = ({ element }) => {
 					<path d='M7.05147 9.68432H1.96061V22.9145H7.05147V9.68432Z' fill='none' />
 				</svg>
 			</span>
-			<span>{element.kudosQuantity}</span>
+			<span>{likeQuantity}</span>
 		</div>
 	)
 }
