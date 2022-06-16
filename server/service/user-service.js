@@ -23,7 +23,7 @@ class UserService {
 		console.log(mail)
 
 		const userDto = new UserDto(user) //возвращает только три поля
-		const tokens = tokenService.generateToken({ ...userDto })
+		const tokens = tokenService.generateTokens({ ...userDto })
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
 		return { ...tokens, user: userDto }
@@ -36,6 +36,22 @@ class UserService {
 		}
 		user.isActivated = true
 		await user.save()
+	}
+	async login(email, password) {
+		const user = await User.findOne({ email })
+		if (!user) {
+			throw ApiError.BadRequest('Пользователь с таким email не был найден')
+		}
+		const isPassEquals = await bcrypt.compare(password, user.password)
+		if (!isPassEquals) {
+			throw ApiError.BadRequest('Неверный пароль')
+		}
+		//из модели выбрасываем всё ненужное
+		const userDto = new UserDto(user)
+		const tokens = tokenService.generateTokens({ ...userDto })
+		await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+		return { ...tokens, user: userDto }
 	}
 }
 
