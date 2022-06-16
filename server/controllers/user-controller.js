@@ -36,7 +36,7 @@ class UserController {
 				maxAge: 30 * 24 * 3600 * 1000,
 				httpOnly: true,
 				//для https необходим флаг secure:true??????
-				secure: true,
+				secure: false,
 			})
 
 			return res.status(201).json(userData)
@@ -47,6 +47,11 @@ class UserController {
 
 	async logout(req, res, next) {
 		try {
+			// const { refreshToken } = req.cookie
+			const { refreshToken } = req.cookies
+			const token = await userService.logout(refreshToken)
+			res.clearCookie('refreshToken')
+			return res.json(token)
 		} catch (error) {
 			next(error)
 		}
@@ -57,7 +62,6 @@ class UserController {
 			const activationLink = req.params.link
 			await userService.activate(activationLink)
 			return res.redirect(process.env.CLIENT_URL)
-			// return res.status(201).json({ message: 'Аккаунт активирован' })
 		} catch (error) {
 			next(error)
 		}
