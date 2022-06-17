@@ -69,6 +69,17 @@ class UserController {
 
 	async refresh(req, res, next) {
 		try {
+			const { refreshToken } = req.cookies
+			const userData = await userService.refresh(refreshToken)
+			//refreshToken будем хранить в куках
+			res.cookie('refreshToken', userData.refreshToken, {
+				maxAge: 30 * 24 * 3600 * 1000,
+				httpOnly: true,
+				//для https необходим флаг secure:true??????
+				secure: false,
+			})
+
+			return res.status(201).json(userData)
 		} catch (error) {
 			next(error)
 		}
