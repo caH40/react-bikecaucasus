@@ -5,7 +5,7 @@ import classes from './InputAuth.module.css'
 
 const InputAuth = ({ label, labelLink, to, validationText, input, register }) => {
 	return (
-		<div>
+		<div className={classes.block}>
 			<div className={classes.label}>
 				<label>{label}</label>
 				{labelLink ? (

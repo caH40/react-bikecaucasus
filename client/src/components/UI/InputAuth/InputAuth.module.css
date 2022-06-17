@@ -1,3 +1,6 @@
+.block {
+	margin-bottom: 5px;
+}
 .label {
 	display: flex;
 	justify-content: space-between;
@@ -27,7 +30,7 @@
 	letter-spacing: 1px;
 	color: #050505;
 	padding: 0px 10px;
-	margin-bottom: 2px;
+	margin-bottom: 4px;
 }
 .input:focus {
 	outline: solid 3px #55b3ae;
@@ -40,5 +43,4 @@
 	letter-spacing: 0;
 	color: red;
 	padding: 0px 5px;
-	margin-bottom: 2px;
 }
