@@ -11,12 +11,12 @@ import userModel from '../models/user-model.js'
 class UserService {
 	async registration(login, email, password) {
 		const candidate = await User.findOne({ email })
-		if (candidate) {
-			throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
-		}
 		const candidateLogin = await User.findOne({ login })
 		if (candidateLogin) {
-			throw ApiError.BadRequest(`Логин ${login} уже занят другим пользователем`)
+			throw ApiError.BadRequest(`Логин ${login} уже занят!`)
+		}
+		if (candidate) {
+			throw ApiError.BadRequest(`Пользователь с таким email уже существует!`)
 		}
 		const hashPassword = await bcrypt.hash(password, 4)
 
@@ -46,7 +46,7 @@ class UserService {
 	async login(login, password) {
 		const user = await User.findOne({ login })
 		if (!user) {
-			throw ApiError.BadRequest(`Пользователь с логином: ${login} не был найден`)
+			throw ApiError.BadRequest(`Пользователь с логином ${login} не найден`)
 		}
 		const isPassEquals = await bcrypt.compare(password, user.password)
 		if (!isPassEquals) {

@@ -7,6 +7,7 @@ import ApiError from '../exceptions/api-error.js'
 class UserController {
 	async registration(req, res, next) {
 		try {
+			console.log(req.body)
 			const errors = validationResult(req)
 			if (!errors.isEmpty()) {
 				return next(ApiError.BadRequest('Ошибка валидации', errors.array()))

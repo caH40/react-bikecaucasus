@@ -26,7 +26,6 @@ const Authentication = ({ setTypeAuth }) => {
 			.then(response => console.log(response.data))
 			.catch(errors => {
 				setValidationAll(errors.response.data.message)
-				console.log(errors.response.data)
 			})
 		reset()
 	}
