@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 
 import classes from './InputAuth.module.css'
 
-const InputAuth = ({ label, labelLink, to, validationText, input, register }) => {
+const InputAuth = ({ label, labelLink, validationText, input, register, setTypeAuth }) => {
 	return (
 		<div className={classes.block}>
 			<div className={classes.label}>
 				<label>{label}</label>
 				{labelLink ? (
-					<Link to={to} className={classes.link}>
+					<span onClick={setTypeAuth} className={classes.link}>
 						{labelLink}
-					</Link>
+					</span>
 				) : (
 					<span></span>
 				)}

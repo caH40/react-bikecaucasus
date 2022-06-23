@@ -1,14 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 
 import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
-
 import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
-import instance from '../../API/axios/index.js'
+import $axios from '../../API/axios/index.js'
 
-const Authentication = () => {
+const Authentication = ({ setTypeAuth }) => {
 	const {
 		register,
 		handleSubmit,
@@ -16,8 +14,9 @@ const Authentication = () => {
 		reset,
 		formState: { errors },
 	} = useForm({ mode: 'all' })
+
 	const onSubmit = async data => {
-		instance({
+		$axios({
 			method: 'post',
 			url: '/api/login',
 			data: { email: data.username, password: data.password },
@@ -53,13 +52,14 @@ const Authentication = () => {
 				}}
 				label='Пароль'
 				labelLink='Забыли пароль?'
-				to='#'
+				setTypeAuth={() => setTypeAuth('rememberPass')}
 				validationText={errors.password ? errors.password.message : ''}
 				input={{ id: 'password', autoComplete: 'current-password', type: 'password' }}
 			/>
 			<ButtonAuth
 				label='Первый раз на сайте?'
 				labelLink='Создать аккаунт!'
+				setTypeAuth={() => setTypeAuth('registration')}
 				to='#'
 				validationText=''>
 				Вход

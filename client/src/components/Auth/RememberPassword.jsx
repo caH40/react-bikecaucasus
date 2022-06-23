@@ -5,22 +5,21 @@ import InputAuth from '../UI/InputAuth/InputAuth'
 
 import classes from './Authentication.module.css'
 
-const Registration = ({ setTypeAuth }) => {
+const RememberPassword = ({ setTypeAuth }) => {
 	return (
 		<form className={classes.block}>
-			<h4 className={classes.title}>Регистрация аккаунта</h4>
-			<InputAuth label='Логин' validationText='' />
+			<h4 className={classes.title}>Восстановление пароля</h4>
+
 			<InputAuth label='Email' validationText='' />
-			<InputAuth label='Пароль' validationText='' />
 			<ButtonAuth
 				setTypeAuth={() => setTypeAuth('login')}
 				label='Уже есть аккаунт?'
-				labelLink='Вход!'
+				labelLink='Вход'
 				validationText=''>
-				Регистрация
+				Восстановить
 			</ButtonAuth>
 		</form>
 	)
 }
 
-export default Registration
+export default RememberPassword

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import classes from './ButtonAuth.module.css'
 
-const ButtonAuth = ({ label, labelLink, to, validationText, children }) => {
+const ButtonAuth = ({ label, labelLink, validationText, children, setTypeAuth }) => {
 	return (
 		<div>
 			<div className={classes.block__button}>
@@ -13,9 +13,9 @@ const ButtonAuth = ({ label, labelLink, to, validationText, children }) => {
 			<div className={classes.label}>
 				<span>{label}</span>
 				{labelLink ? (
-					<Link to={to} className={classes.link}>
+					<span onClick={setTypeAuth} className={classes.link}>
 						{labelLink}
-					</Link>
+					</span>
 				) : (
 					<span></span>
 				)}

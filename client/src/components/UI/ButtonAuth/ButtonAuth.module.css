@@ -41,6 +41,11 @@
 	font-size: 13px;
 	text-decoration: underline;
 	color: #050505;
+	cursor: pointer;
+}
+.link:hover {
+	text-decoration: none;
+	color: #479692;
 }
 .validation {
 	height: 14px;
