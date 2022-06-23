@@ -9,15 +9,19 @@ import ApiError from '../exceptions/api-error.js'
 import userModel from '../models/user-model.js'
 
 class UserService {
-	async registration(email, password) {
+	async registration(login, email, password) {
 		const candidate = await User.findOne({ email })
 		if (candidate) {
 			throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
 		}
+		const candidateLogin = await User.findOne({ login })
+		if (candidateLogin) {
+			throw ApiError.BadRequest(`Логин ${login} уже занят другим пользователем`)
+		}
 		const hashPassword = await bcrypt.hash(password, 4)
 
 		const activationLink = uuidv4()
-		const user = await User.create({ email, password: hashPassword, activationLink })
+		const user = await User.create({ login, email, password: hashPassword, activationLink })
 		const target = 'registration'
 		const username = email
 		const mail = await mailerService.sendActivationMail(email, activationLink)
@@ -38,10 +42,11 @@ class UserService {
 		user.isActivated = true
 		await user.save()
 	}
-	async login(email, password) {
-		const user = await User.findOne({ email })
+
+	async login(login, password) {
+		const user = await User.findOne({ login })
 		if (!user) {
-			throw ApiError.BadRequest('Пользователь с таким email не был найден')
+			throw ApiError.BadRequest(`Пользователь с логином: ${login} не был найден`)
 		}
 		const isPassEquals = await bcrypt.compare(password, user.password)
 		if (!isPassEquals) {

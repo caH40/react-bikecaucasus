@@ -8,12 +8,11 @@ import RememberPassword from './Auth/RememberPassword'
 
 const Header = () => {
 	const [visible, setVisible] = useState(false)
-	//typeAuth = ['login','registration','rememberPass']
 	const [typeAuth, setTypeAuth] = useState('login')
 	const [modalAuth, setModalAuth] = useState(<Authentication />)
-	console.log('перерисовка')
 
 	useEffect(() => {
+		console.log('перерисовка')
 		if (typeAuth === 'login') {
 			setModalAuth(<Authentication setTypeAuth={setTypeAuth} />)
 		}

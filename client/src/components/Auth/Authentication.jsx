@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
@@ -7,6 +7,8 @@ import classes from './Authentication.module.css'
 import $axios from '../../API/axios/index.js'
 
 const Authentication = ({ setTypeAuth }) => {
+	const [validationAll, setValidationAll] = useState('')
+
 	const {
 		register,
 		handleSubmit,
@@ -19,11 +21,13 @@ const Authentication = ({ setTypeAuth }) => {
 		$axios({
 			method: 'post',
 			url: '/api/login',
-			data: { email: data.username, password: data.password },
+			data: { login: data.username, password: data.password },
 		})
 			.then(response => console.log(response.data))
-			.catch(errors => console.log(errors.response.data))
-		// console.log(data)
+			.catch(errors => {
+				setValidationAll(errors.response.data.message)
+				console.log(errors.response.data)
+			})
 		reset()
 	}
 
@@ -60,8 +64,7 @@ const Authentication = ({ setTypeAuth }) => {
 				label='Первый раз на сайте?'
 				labelLink='Создать аккаунт!'
 				setTypeAuth={() => setTypeAuth('registration')}
-				to='#'
-				validationText=''>
+				validationText={validationAll}>
 				Вход
 			</ButtonAuth>
 		</form>
