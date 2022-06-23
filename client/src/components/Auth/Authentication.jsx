@@ -1,10 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
 
 import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
+import instance from '../../API/axios/index.js'
 
 const Authentication = () => {
 	const {
@@ -13,9 +15,16 @@ const Authentication = () => {
 
 		reset,
 		formState: { errors },
-	} = useForm()
-	const onSubmit = data => {
-		console.log(data)
+	} = useForm({ mode: 'all' })
+	const onSubmit = async data => {
+		instance({
+			method: 'post',
+			url: '/api/login',
+			data: { email: data.username, password: data.password },
+		})
+			.then(response => console.log(response.data))
+			.catch(errors => console.log(errors.response.data))
+		// console.log(data)
 		reset()
 	}
 
