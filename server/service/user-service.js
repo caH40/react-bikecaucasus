@@ -16,7 +16,7 @@ class UserService {
 			throw ApiError.BadRequest(`Логин ${login} уже занят!`)
 		}
 		if (candidate) {
-			throw ApiError.BadRequest(`Пользователь с таким email уже существует!`)
+			throw ApiError.BadRequest(`Пользователь с таким email существует!`)
 		}
 		const hashPassword = await bcrypt.hash(password, 4)
 

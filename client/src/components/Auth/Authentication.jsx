@@ -5,8 +5,9 @@ import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
 import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
 import $axios from '../../API/axios/index.js'
+import { validateUsername, validatePassword } from '../../service/validatorService'
 
-const Authentication = ({ setTypeAuth }) => {
+const Authentication = ({ setTypeAuth, setVisible, answer }) => {
 	const [validationAll, setValidationAll] = useState('')
 
 	const {
@@ -23,7 +24,15 @@ const Authentication = ({ setTypeAuth }) => {
 			url: '/api/login',
 			data: { login: data.username, password: data.password },
 		})
-			.then(response => console.log(response.data))
+			.then(response => {
+				console.log(response)
+				answer(response.data.user.login)
+				setTypeAuth('answer')
+				setTimeout(() => {
+					setVisible(false)
+				}, 1000)
+			})
+
 			.catch(errors => {
 				setValidationAll(errors.response.data.message)
 			})
@@ -34,25 +43,13 @@ const Authentication = ({ setTypeAuth }) => {
 		<form onSubmit={handleSubmit(onSubmit)} className={classes.block}>
 			<h4 className={classes.title}>Вход на Bike-Caucasus</h4>
 			<InputAuth
-				register={{
-					...register('username', {
-						required: 'Это обязательное поле для заполнения',
-						minLength: { value: 5, message: 'Username должен быть больше 4х символов' },
-						maxLength: { value: 15, message: 'Username не может быть больше 15 символов' },
-					}),
-				}}
+				register={validateUsername(register)}
 				label='Логин'
 				validationText={errors.username ? errors.username.message : ''}
 				input={{ id: 'username', autoComplete: 'username', type: 'text' }}
 			/>
 			<InputAuth
-				register={{
-					...register('password', {
-						required: 'Это обязательное поле для заполнения',
-						minLength: { value: 6, message: 'Password должен быть больше 5х символов' },
-						maxLength: { value: 15, message: 'Password не может быть больше 15 символов' },
-					}),
-				}}
+				register={validatePassword(register)}
 				label='Пароль'
 				labelLink='Забыли пароль?'
 				setTypeAuth={() => setTypeAuth('rememberPass')}

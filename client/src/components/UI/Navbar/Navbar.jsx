@@ -22,7 +22,7 @@ const Navbar = props => {
 				<Li to='profile' className={classes.item} classNameLink={classes.link__img}>
 					<img className={classes.profile__img} src='images/icons/avatar.svg' alt='avatar' />
 				</Li>
-				<li onClick={() => props.loginModal(true)} className={classes.link__img}>
+				<li onClick={props.loginModal} className={classes.link__img}>
 					<img className={classes.login__icon} src='images/icons/login.svg' alt='Пустышка' />
 				</li>
 			</ul>
