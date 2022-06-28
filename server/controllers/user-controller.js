@@ -60,8 +60,8 @@ class UserController {
 
 	async activate(req, res, next) {
 		try {
-			const activationLink = req.params.link
-			await userService.activate(activationLink)
+			const activationToken = req.params.token
+			await userService.activate(activationToken)
 			return res.redirect(process.env.CLIENT_URL)
 		} catch (error) {
 			next(error)
@@ -81,6 +81,29 @@ class UserController {
 			})
 
 			return res.status(201).json(userData)
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async resetPassword(req, res, next) {
+		try {
+			const { email } = req.body
+			const response = await userService.resetPassword(email)
+			if (response.hasError) {
+				return res.status(400).json({ message: response.message })
+			}
+			res.status(200).json({ email: response.email })
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async newPassword(req, res, next) {
+		try {
+			const { resetToken } = req.params
+			console.log(resetToken)
+			return res.status(200).json({ message: 'введите новый пароль' })
 		} catch (error) {
 			next(error)
 		}

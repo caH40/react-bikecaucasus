@@ -7,7 +7,7 @@ import classes from './Authentication.module.css'
 import $axios from '../../API/axios/index.js'
 import { validateUsername, validateEmail, validatePassword } from '../../service/validatorService'
 
-const Registration = ({ setTypeAuth }) => {
+const Registration = ({ setTypeAuth, setAnswerContent }) => {
 	const [validationAll, setValidationAll] = useState('')
 
 	const {
@@ -26,9 +26,10 @@ const Registration = ({ setTypeAuth }) => {
 		})
 			.then(response => {
 				console.log(response)
-				if (response.status === 201) {
-					setTypeAuth('answer')
-				}
+				setAnswerContent(
+					`Регистрация прошла успешно. На вашу почту ${response.data.user.email} отправлено письмо, для активации логина и подтверждения e-mail. Необходимо произвести активацию в течении 2х дней. Письмо может попасть в папку "Спам"`
+				)
+				setTypeAuth('answer')
 			})
 			.catch(errors => {
 				console.log(errors.response.data)
@@ -49,7 +50,7 @@ const Registration = ({ setTypeAuth }) => {
 				register={validateEmail(register)}
 				label='Email'
 				validationText={errors.email ? errors.email.message : ''}
-				input={{ id: 'email', autoComplete: 'username', type: 'text' }}
+				input={{ id: 'email', autoComplete: 'email', type: 'text' }}
 			/>
 			<InputAuth
 				register={validatePassword(register)}

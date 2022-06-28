@@ -16,8 +16,10 @@ router.post(
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
 //:link это динамический параметр, который будет принимать из url как params
-router.get('/activate/:link', userController.activate)
+router.get('/activate/:token', userController.activate)
 router.get('/refresh', userController.refresh)
+router.post('/reset', userController.resetPassword)
+router.get('/new-password/:resetToken', userController.newPassword)
 router.get('/users', authMiddleware, userController.getUsers)
 
 export default router

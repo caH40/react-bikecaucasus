@@ -4,7 +4,7 @@ import Navbar from './UI/Navbar/Navbar'
 import MainModal from './Modal/MainModal'
 import Authentication from './Auth/Authentication'
 import Registration from './Auth/Registration'
-import RememberPassword from './Auth/RememberPassword'
+import ResetPassword from './Auth/ResetPassword'
 import Answer from './Auth/Answer'
 
 const Header = () => {
@@ -20,15 +20,15 @@ const Header = () => {
 				<Authentication
 					setTypeAuth={setTypeAuth}
 					setVisible={setVisible}
-					answer={setAnswerContent}
+					setAnswerContent={setAnswerContent}
 				/>
 			)
 		}
 		if (typeAuth === 'registration') {
-			setModalAuth(<Registration setTypeAuth={setTypeAuth} />)
+			setModalAuth(<Registration setTypeAuth={setTypeAuth} setAnswerContent={setAnswerContent} />)
 		}
 		if (typeAuth === 'rememberPass') {
-			setModalAuth(<RememberPassword setTypeAuth={setTypeAuth} />)
+			setModalAuth(<ResetPassword setTypeAuth={setTypeAuth} setAnswerContent={setAnswerContent} />)
 		}
 		if (typeAuth === 'answer') {
 			setModalAuth(<Answer>{answerContent}</Answer>)

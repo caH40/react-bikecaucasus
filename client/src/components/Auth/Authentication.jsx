@@ -7,26 +7,24 @@ import classes from './Authentication.module.css'
 import $axios from '../../API/axios/index.js'
 import { validateUsername, validatePassword } from '../../service/validatorService'
 
-const Authentication = ({ setTypeAuth, setVisible, answer }) => {
+const Authentication = ({ setTypeAuth, setVisible, setAnswerContent }) => {
 	const [validationAll, setValidationAll] = useState('')
 
 	const {
 		register,
 		handleSubmit,
-
-		reset,
 		formState: { errors },
 	} = useForm({ mode: 'all' })
 
 	const onSubmit = async data => {
-		$axios({
+		await $axios({
 			method: 'post',
 			url: '/api/login',
 			data: { login: data.username, password: data.password },
 		})
 			.then(response => {
 				console.log(response)
-				answer(response.data.user.login)
+				setAnswerContent(`С возвращением, ${response.data.user.login}`)
 				setTypeAuth('answer')
 				setTimeout(() => {
 					setVisible(false)
@@ -36,7 +34,6 @@ const Authentication = ({ setTypeAuth, setVisible, answer }) => {
 			.catch(errors => {
 				setValidationAll(errors.response.data.message)
 			})
-		reset()
 	}
 
 	return (

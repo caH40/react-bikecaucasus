@@ -14,6 +14,7 @@
 	background: #f9a527;
 	border-radius: 10px;
 	min-width: 315px;
+	margin: 0px 15px;
 }
 
 .authModal.active {

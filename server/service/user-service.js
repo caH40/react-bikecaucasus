@@ -20,11 +20,16 @@ class UserService {
 		}
 		const hashPassword = await bcrypt.hash(password, 4)
 
-		const activationLink = uuidv4()
-		const user = await User.create({ login, email, password: hashPassword, activationLink })
+		const activationToken = uuidv4()
+		const user = await User.create({ login, email, password: hashPassword, activationToken })
 		const target = 'registration'
-		const username = email
-		const mail = await mailerService.sendActivationMail(email, activationLink)
+		const mail = await mailerService.sendActivationMail(
+			email,
+			activationToken,
+			target,
+			login,
+			password
+		)
 		console.log(mail)
 
 		const userDto = new UserDto(user) //возвращает только три поля
@@ -81,6 +86,20 @@ class UserService {
 		await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
 		return { ...tokens, user: userDto }
+	}
+
+	async resetPassword(email) {
+		const response = await User.findOne({ email })
+		if (!response) return { message: `Учетной записи с ${email} не существует`, hasError: true }
+		const token = uuidv4()
+		const target = 'resetPassword'
+		const mail = await mailerService.sendActivationMail(
+			response.email,
+			token,
+			target,
+			response.login
+		)
+		return response
 	}
 
 	async getAllUsers() {
