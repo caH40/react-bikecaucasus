@@ -24,7 +24,7 @@ export function validatePassword(register) {
 	return {
 		...register('password', {
 			required: 'Это обязательное поле для заполнения',
-			minLength: { value: 6, message: 'Password должен быть больше 5х символов' },
+			minLength: { value: 6, message: 'Password должен быть больше 5ти символов' },
 			maxLength: { value: 15, message: 'Password не может быть больше 15 символов' },
 		}),
 	}

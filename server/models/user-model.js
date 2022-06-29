@@ -7,6 +7,7 @@ const userSchema = new Schema({
 	password: { type: String, required: true },
 	isActivated: { type: Boolean, default: false },
 	activationToken: { type: String },
+	resetToken: { type: String },
 })
 
 export default model('User', userSchema)

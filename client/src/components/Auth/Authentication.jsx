@@ -5,7 +5,7 @@ import ButtonAuth from '../UI/ButtonAuth/ButtonAuth'
 import InputAuth from '../UI/InputAuth/InputAuth'
 import classes from './Authentication.module.css'
 import $axios from '../../API/axios/index.js'
-import { validateUsername, validatePassword } from '../../service/validatorService'
+import { validateUsername, validatePassword } from '../../service/validatorService.js'
 
 const Authentication = ({ setTypeAuth, setVisible, setAnswerContent }) => {
 	const [validationAll, setValidationAll] = useState('')

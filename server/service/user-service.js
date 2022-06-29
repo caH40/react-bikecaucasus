@@ -30,7 +30,6 @@ class UserService {
 			login,
 			password
 		)
-		console.log(mail)
 
 		const userDto = new UserDto(user) //возвращает только три поля
 		const tokens = tokenService.generateTokens({ ...userDto })
@@ -39,8 +38,8 @@ class UserService {
 		return { ...tokens, user: userDto }
 	}
 
-	async activate(activationLink) {
-		const user = await User.findOne({ activationLink })
+	async activate(activationToken) {
+		const user = await User.findOne({ activationToken })
 		if (!user) {
 			throw ApiError.BadRequest('Некорректная ссылка активации')
 		}
@@ -89,17 +88,34 @@ class UserService {
 	}
 
 	async resetPassword(email) {
-		const response = await User.findOne({ email })
-		if (!response) return { message: `Учетной записи с ${email} не существует`, hasError: true }
-		const token = uuidv4()
+		const resetToken = uuidv4()
+		const user = await User.findOneAndUpdate({ email }, { $set: { resetToken } })
+		if (!user) return { message: `Учетной записи с ${email} не существует`, hasError: true }
 		const target = 'resetPassword'
-		const mail = await mailerService.sendActivationMail(
-			response.email,
-			token,
-			target,
-			response.login
+		await mailerService.sendActivationMail(user.email, resetToken, target, user.login)
+		const userDto = new UserDto(user)
+
+		return userDto
+	}
+
+	async checkResetToken(resetToken) {
+		const user = await User.findOne({ resetToken })
+		if (!user) return { message: 'Ошибка при сбросе пароля', hasError: true }
+		const userDto = new UserDto(user)
+		return userDto
+	}
+
+	async saveNewPassword(resetToken, password) {
+		const hashPassword = await bcrypt.hash(password, 4)
+		const user = await User.findOneAndUpdate(
+			{ resetToken },
+			{ $set: { password: hashPassword, resetToken: '' } }
 		)
-		return response
+		if (!user) return { message: 'Ошибка при изменении пароля', hasError: true }
+		const target = 'savedNewPassword'
+		await mailerService.sendActivationMail(user.email, resetToken, target, user.login, password)
+		const userDto = new UserDto(user)
+		return userDto
 	}
 
 	async getAllUsers() {

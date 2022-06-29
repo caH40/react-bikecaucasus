@@ -12,6 +12,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 
 import './css/App.css'
+import NewPassword from './components/Auth/NewPassword'
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 				<Route path='gallery' element={<Gallery />} />
 				<Route path='dzhilsu' element={<Dzhilsu />} />
 				<Route path='*' element={<Page404 />} />
+				<Route path='new-password/:resetToken' element={<NewPassword />} />
 			</Routes>
 			<Footer />
 		</main>

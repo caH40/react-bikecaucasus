@@ -89,11 +89,11 @@ class UserController {
 	async resetPassword(req, res, next) {
 		try {
 			const { email } = req.body
-			const response = await userService.resetPassword(email)
-			if (response.hasError) {
-				return res.status(400).json({ message: response.message })
+			const user = await userService.resetPassword(email)
+			if (user.hasError) {
+				return res.status(400).json({ message: user.message })
 			}
-			res.status(200).json({ email: response.email })
+			res.status(200).json({ email: user.email })
 		} catch (error) {
 			next(error)
 		}
@@ -102,8 +102,25 @@ class UserController {
 	async newPassword(req, res, next) {
 		try {
 			const { resetToken } = req.params
-			console.log(resetToken)
-			return res.status(200).json({ message: 'введите новый пароль' })
+			if (!resetToken) return res.status(400).json({ message: 'Нет токена для обновления пароля' })
+			const user = await userService.checkResetToken(resetToken)
+			if (user.hasError) {
+				return res.status(400).json({ message: user.message })
+			}
+			return res.redirect(process.env.CLIENT_URL + `/new-password/${resetToken}`)
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async saveNewPassword(req, res, next) {
+		try {
+			const { password, resetToken } = req.body
+			const user = await userService.saveNewPassword(resetToken, password)
+			if (user.hasError) {
+				return res.status(400).json({ message: user.message })
+			}
+			return res.status(200).json({ message: 'Пароль изменён' })
 		} catch (error) {
 			next(error)
 		}
